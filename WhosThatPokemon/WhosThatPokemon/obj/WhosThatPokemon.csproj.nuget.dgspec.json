@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Desktop\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj": {}
+    "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Desktop\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj": {
+    "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Desktop\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
+        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
         "projectName": "WhosThatPokemon",
-        "projectPath": "C:\\Users\\Usuario\\Desktop\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
+        "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
         "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Desktop\\WhosThatPokemon\\WhosThatPokemon\\obj\\",
+        "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -49,6 +49,16 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Session": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.4, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

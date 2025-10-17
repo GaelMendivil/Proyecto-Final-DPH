@@ -15,6 +15,9 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        // ✅ AÑADE ESTA LÍNEA AQUÍ
+        // Esto le asigna la clase CSS "home-page" al <body> de la página de inicio.
+        ViewData["BodyClass"] = "home-page";
         return View();
     }
 
@@ -29,3 +32,4 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
+
