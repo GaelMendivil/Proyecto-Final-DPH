@@ -1,0 +1,126 @@
+@model dynamic
+
+@{
+    ViewData["Title"] = "Pokedex Game";
+}
+
+<style>
+    body {
+        background-color: #add8e6;
+        background-image: url('/images/Pokedex.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Arial, sans-serif;
+        gap: 30px; /* separación entre los recuadros */
+        flex-wrap: wrap;
+    }
+
+    .box {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        width: 300px;
+        min-height: 250px;
+        text-align: center;
+    }
+
+    .description-box h2,
+    .guess-box h2 {
+        margin-bottom: 15px;
+    }
+
+    .description {
+        font-style: italic;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .message {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #f04e30;
+    }
+
+    .pokemon-type {
+        font-weight: bold;
+        text-transform: capitalize;
+        margin-bottom: 10px;
+    }
+
+    .pokemon-sprite img {
+        max-width: 150px;
+        margin-top: 10px;
+    }
+
+    .guess-box input[type="text"] {
+        padding: 10px;
+        width: 80%;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+    }
+
+    .guess-box button {
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        background-color: #f04e30;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        width: 80%;
+    }
+
+    .guess-box button:hover {
+        background-color: #d03d25;
+    }
+
+    .attempts {
+        margin-top: 15px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="box description-box">
+    <h2>Descripción y Pistas</h2>
+
+    @if(ViewBag.Description != null)
+    {
+        <div class="description">@ViewBag.Description</div>
+    }
+
+    @if(ViewBag.Message != null)
+    {
+        <div class="message">@ViewBag.Message</div>
+    }
+
+    @if(ViewBag.ShowType == true && ViewBag.Type != null)
+    {
+        <div class="pokemon-type">Tipo: @ViewBag.Type</div>
+    }
+
+    @if(ViewBag.Sprite != null)
+    {
+        <div class="pokemon-sprite">
+            <img src="@ViewBag.Sprite" alt="Pokemon Sprite" />
+        </div>
+    }
+
+    <div class="attempts">
+        Intentos: @ViewBag.Attempts
+    </div>
+</div>
+
+<div class="box guess-box">
+    <h2>Adivina el Pokémon</h2>
+    <form asp-action="Guess" asp-controller="PokedexGame" method="post">
+        <input type="text" name="guess" placeholder="Inserta un nombre..." required />
+        <button type="submit">Adivinar</button>
+    </form>
+</div>
