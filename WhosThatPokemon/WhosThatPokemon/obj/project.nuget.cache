@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QUAwhw5Ufdk=",
+  "dgSpecHash": "uhzRgJgxjLQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\almaz\\OneDrive\\Escritorio\\ProyectoPokemon\\Proyecto-Final-DPH-main\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
+  "projectFilePath": "C:\\Users\\almaz\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\almaz\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\2.3.0\\microsoft.aspnetcore.cryptography.internal.2.3.0.nupkg.sha512",
     "C:\\Users\\almaz\\.nuget\\packages\\microsoft.aspnetcore.dataprotection\\2.3.0\\microsoft.aspnetcore.dataprotection.2.3.0.nupkg.sha512",
