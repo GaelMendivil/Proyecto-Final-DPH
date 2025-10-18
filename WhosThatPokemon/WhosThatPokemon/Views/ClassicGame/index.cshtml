@@ -313,7 +313,38 @@
         font-weight: bold;
         margin-bottom: 15px;
     }
+ .back-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.back-button {
+    margin-top: 20px;
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #ff4d4d;
+    color: white;
+    border: 3px solid #b30000;
+    border-radius: 8px;
+    font-size: 1em;
+    text-decoration: none;
+    font-family: 'Press Start 2P', cursive;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.back-button:hover {
+    background-color: #b30000;
+    transform: translateY(-2px);
+}
+
+
 </style>
+
+<div class="back-button-container">
+    <a href="@Url.Action("Index", "Games")" class="back-button">VOLVER</a>
+</div>
 
 <div class="game-container">
     <h1>Who is That Pokémon?</h1>

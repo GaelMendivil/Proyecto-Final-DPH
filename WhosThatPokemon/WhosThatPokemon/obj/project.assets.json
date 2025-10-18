@@ -1196,23 +1196,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Usuario\\.nuget\\packages\\": {},
+    "C:\\Users\\almaz\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
+      "projectUniqueName": "C:\\Users\\almaz\\OneDrive\\Escritorio\\ProyectoPokemon\\Proyecto-Final-DPH-main\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
       "projectName": "WhosThatPokemon",
-      "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
-      "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\obj\\",
+      "projectPath": "C:\\Users\\almaz\\OneDrive\\Escritorio\\ProyectoPokemon\\Proyecto-Final-DPH-main\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
+      "packagesPath": "C:\\Users\\almaz\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\almaz\\OneDrive\\Escritorio\\ProyectoPokemon\\Proyecto-Final-DPH-main\\WhosThatPokemon\\WhosThatPokemon\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\almaz\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
