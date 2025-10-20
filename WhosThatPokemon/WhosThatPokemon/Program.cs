@@ -24,8 +24,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-// ✅ ¡LÍNEA CRÍTICA! Esta línea le permite a tu app usar los archivos de la carpeta wwwroot (CSS, imágenes, etc.)
+            
 app.UseStaticFiles();
 
 app.UseRouting();

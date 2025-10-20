@@ -9,7 +9,7 @@ namespace WhosThatPokemon.Controllers
             return View();
         }
 
-        public IActionResult Classic()
+        public IActionResult ClassicGame()
         {
             return View(); 
         }
@@ -18,5 +18,5 @@ namespace WhosThatPokemon.Controllers
         {
             return View(); 
         }
-    }
+    }       
 }
