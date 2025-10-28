@@ -26,7 +26,7 @@ namespace WhosThatPokemon.Services
 
             if (!pokemonResponse.IsSuccessStatusCode || !speciesResponse.IsSuccessStatusCode)
             {
-                return null; // Pokémon no encontrado
+                return null; 
             }
 
             var pokemonContent = await pokemonResponse.Content.ReadAsStringAsync();
@@ -35,18 +35,47 @@ namespace WhosThatPokemon.Services
             dynamic pokemonData = JsonConvert.DeserializeObject(pokemonContent);
             dynamic speciesData = JsonConvert.DeserializeObject(speciesContent);
 
-            var pokemonViewModel = new PokemonViewModel
+        string description = null;
+        foreach (var entry in speciesData.flavor_text_entries)
+        {
+            if (entry.language.name == "es")
             {
-                Name = (string)pokemonData.name,
-                ImageUrl = (string)pokemonData.sprites.front_default,
-                Type1 = (string)pokemonData.types[0].type.name,
-                Type2 = pokemonData.types.Count > 1 ? (string)pokemonData.types[1].type.name : null,
-                Height = (double)pokemonData.height / 10,
-                Weight = (double)pokemonData.weight / 10,
-                Generation = GetGenerationFromUrl((string)speciesData.generation.url),
-                Color = (string)speciesData.color.name,
-                EvolutionStage = await GetEvolutionStage((string)pokemonData.name, (string)speciesData.evolution_chain.url)
-            };
+                description = ((string)entry.flavor_text)
+                    .Replace("\n", " ")
+                    .Replace("\f", " ");
+                break;
+            }
+        }
+
+        if (string.IsNullOrEmpty(description))
+        {
+            foreach (var entry in speciesData.flavor_text_entries)
+            {
+                if (entry.language.name == "en")
+                {
+                    description = ((string)entry.flavor_text)
+                        .Replace("\n", " ")
+                        .Replace("\f", " ");
+                    break;
+                }
+            }
+        }
+
+
+                    var pokemonViewModel = new PokemonViewModel
+        {
+            Name = (string)pokemonData.name,
+            ImageUrl = (string)pokemonData.sprites.front_default,
+            Type1 = (string)pokemonData.types[0].type.name,
+            Type2 = pokemonData.types.Count > 1 ? (string)pokemonData.types[1].type.name : null,
+            Height = (double)pokemonData.height / 10,
+            Weight = (double)pokemonData.weight / 10,
+            Generation = GetGenerationFromUrl((string)speciesData.generation.url),
+            Color = (string)speciesData.color.name,
+            EvolutionStage = await GetEvolutionStage((string)pokemonData.name, (string)speciesData.evolution_chain.url),
+            Description = description
+        };
+
             
             return pokemonViewModel;
         }

@@ -1,9 +1,7 @@
-// Asegúrate de tener estos 'usings' al principio del archivo
 using WhosThatPokemon.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient<IPokemonApiService, PokemonApiService>();
 builder.Services.AddSession(options =>
@@ -16,7 +14,6 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -25,7 +22,6 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// ✅ ¡LÍNEA CRÍTICA! Esta línea le permite a tu app usar los archivos de la carpeta wwwroot (CSS, imágenes, etc.)
 app.UseStaticFiles();
 
 app.UseRouting();

@@ -11,6 +11,8 @@ namespace WhosThatPokemon.Models.ViewModels
         public int Generation { get; set; }
         public double Height { get; set; } // En metros
         public double Weight { get; set; } // En kilogramos
+
+        public string Description { get; set; }
     }
 
     public class GuessResultViewModel : PokemonViewModel
