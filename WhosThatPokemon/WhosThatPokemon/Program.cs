@@ -11,6 +11,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
+builder.Services.AddMemoryCache(); 
 
 var app = builder.Build();
 
