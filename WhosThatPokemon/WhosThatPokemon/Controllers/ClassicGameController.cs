@@ -38,7 +38,16 @@ namespace WhosThatPokemon.Controllers
             var random = new Random();
             var mysteryPokemonName = _allPokemonNames[random.Next(_allPokemonNames.Count)];
 
-            HttpContext.Session.SetString("MysteryPokemonName", mysteryPokemonName);
+            // Se obtiene el Pokémon misterioso y se guarda en la sesión
+            var mysteryPokemon = await _pokemonApiService.GetPokemonDataAsync(mysteryPokemonName);
+            
+            // Si la API falla al inicio, reintenta con otro Pokémon
+            if (mysteryPokemon == null)
+            {
+                return RedirectToAction(nameof(Index)); 
+            }
+
+            HttpContext.Session.Set("MysteryPokemon", mysteryPokemon);
             HttpContext.Session.Remove("CurrentGuesses");
 
             var gameSession = new GameSessionViewModel
@@ -59,21 +68,23 @@ namespace WhosThatPokemon.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var mysteryPokemonName = HttpContext.Session.GetString("MysteryPokemonName");
-            if (string.IsNullOrEmpty(mysteryPokemonName))
+            // Se obtiene el Pokémon a adiviniar con todos sus datos desde la sesión
+            var mysteryPokemon = HttpContext.Session.Get<PokemonViewModel>("MysteryPokemon");
+            if (mysteryPokemon == null)
             {
+                // La sesión expiró o falló, reinicia el juego
                 return RedirectToAction(nameof(Index));
             }
 
-            var mysteryPokemon = await _pokemonApiService.GetPokemonDataAsync(mysteryPokemonName);
+            // La llamada del guess usa la caché para optimización
             var guessedPokemon = await _pokemonApiService.GetPokemonDataAsync(guessedPokemonName);
             var currentGuesses = HttpContext.Session.Get<List<GuessResultViewModel>>("CurrentGuesses") ?? new List<GuessResultViewModel>();
 
-            if (guessedPokemon == null || mysteryPokemon == null)
+            if (guessedPokemon == null)
             {
-                TempData["ErrorMessage"] = $"Hubo un error al obtener los datos de un Pokémon. Inténtalo de nuevo.";
-                model.Guesses = currentGuesses;
-                return View("Index", model);
+                 TempData["ErrorMessage"] = $"No se encontró un Pokémon con el nombre '{guessedPokemonName}'.";
+                 model.Guesses = currentGuesses;
+                 return View("Index", model);
             }
 
             var guessResult = ComparePokemon(guessedPokemon, mysteryPokemon);
@@ -85,7 +96,7 @@ namespace WhosThatPokemon.Controllers
 
             if (model.HasGuessedCorrectly)
             {
-                HttpContext.Session.Remove("MysteryPokemonName");
+                HttpContext.Session.Remove("MysteryPokemon");
             }
             else
             {
@@ -116,10 +127,11 @@ namespace WhosThatPokemon.Controllers
             var results = new List<PokemonSearchViewModel>();
             foreach (var name in filteredNames)
             {
-                var pokemonData = await _pokemonApiService.GetPokemonDataAsync(name);
+                // Llama a la función que usa caché para la optimización
+                var pokemonData = await _pokemonApiService.GetPokemonSearchDataAsync(name);
                 if (pokemonData != null)
                 {
-                    results.Add(new PokemonSearchViewModel { Name = name, ImageUrl = pokemonData.ImageUrl });
+                    results.Add(pokemonData);
                 }
             }
 

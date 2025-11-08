@@ -1202,11 +1202,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Usuario\\Downloads\\Proyecto-Final-DPH-GameSelectorPadding\\Proyecto-Final-DPH-GameSelectorPadding\\Proyecto-Final-DPH'Pokedex\\Proyecto-Final-DPH-Pokedex\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
+      "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
       "projectName": "WhosThatPokemon",
-      "projectPath": "C:\\Users\\Usuario\\Downloads\\Proyecto-Final-DPH-GameSelectorPadding\\Proyecto-Final-DPH-GameSelectorPadding\\Proyecto-Final-DPH'Pokedex\\Proyecto-Final-DPH-Pokedex\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
+      "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
       "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Usuario\\Downloads\\Proyecto-Final-DPH-GameSelectorPadding\\Proyecto-Final-DPH-GameSelectorPadding\\Proyecto-Final-DPH'Pokedex\\Proyecto-Final-DPH-Pokedex\\WhosThatPokemon\\WhosThatPokemon\\obj\\",
+      "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
