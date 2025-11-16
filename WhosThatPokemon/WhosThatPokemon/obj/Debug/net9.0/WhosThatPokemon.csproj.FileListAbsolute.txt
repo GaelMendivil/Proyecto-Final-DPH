@@ -120,9 +120,6 @@ C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPok
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\scopedcss\bundle\WhosThatPokemon.styles.css
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\scopedcss\projectbundle\WhosThatPokemon.bundle.scp.css
-C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\ep5iix8zaa-ezitwh0vem.gz
-C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\mm0x8b5bve-b9sayid5wm.gz
-C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\13yp54lkkn-wm10a186p7.gz
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\iydrblmc6a-61n19gt1b8.gz
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\vfc7m6bplk-xtxxf3hu2r.gz
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\w37i2mm2ka-bqjiyaj88i.gz
@@ -169,8 +166,6 @@ C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPok
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\gry7fpdcdb-h1s4sie4z3.gz
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\pzhmd57ztk-63fj8s7r0e.gz
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\n3b5pz6icv-0j3bgjxly4.gz
-C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\e2cdl0ilow-47otxtyo56.gz
-C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\gdzafwqw4i-4v8eqarkd7.gz
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\us9kb0fy48-356vix0kms.gz
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\y30ywv30ak-83jwlth58m.gz
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\6cc6br0q79-mrlpezrjn3.gz
@@ -703,3 +698,6 @@ C:\Users\Usuario\Downloads\Proyecto-Final-DPH-GameSelectorPadding\Proyecto-Final
 C:\Users\Usuario\Downloads\Proyecto-Final-DPH-GameSelectorPadding\Proyecto-Final-DPH-GameSelectorPadding\Proyecto-Final-DPH'Pokedex\Proyecto-Final-DPH-Pokedex\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\WhosThatPokemon.pdb
 C:\Users\Usuario\Downloads\Proyecto-Final-DPH-GameSelectorPadding\Proyecto-Final-DPH-GameSelectorPadding\Proyecto-Final-DPH'Pokedex\Proyecto-Final-DPH-Pokedex\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\WhosThatPokemon.genruntimeconfig.cache
 C:\Users\Usuario\Downloads\Proyecto-Final-DPH-GameSelectorPadding\Proyecto-Final-DPH-GameSelectorPadding\Proyecto-Final-DPH'Pokedex\Proyecto-Final-DPH-Pokedex\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\ref\WhosThatPokemon.dll
+C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\ep5iix8zaa-ezitwh0vem.gz
+C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\13yp54lkkn-eo7gusbwfn.gz
+C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\mm0x8b5bve-b9sayid5wm.gz

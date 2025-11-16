@@ -109,21 +109,21 @@ namespace WhosThatPokemon.Controllers
             }
 
             var filteredNames = _allPokemonNames
-                .Where(p => p.StartsWith(term, System.StringComparison.OrdinalIgnoreCase))
+                .Where(p => p.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
                 .Take(7)
                 .ToList();
 
-            var results = new List<PokemonSearchViewModel>();
-            foreach (var name in filteredNames)
-            {
-                var pokemonData = await _pokemonApiService.GetPokemonDataAsync(name);
-                if (pokemonData != null)
-                {
-                    results.Add(new PokemonSearchViewModel { Name = name, ImageUrl = pokemonData.ImageUrl });
-                }
-            }
+            var results = filteredNames
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .Select(n => new PokemonSearchViewModel 
+                { 
+                    Name = n, 
+                    ImageUrl = $"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{_allPokemonNames.IndexOf(n)+1}.png"
+                })
+                .ToList();
 
             return Json(results);
+
         }
 
         private GuessResultViewModel ComparePokemon(PokemonViewModel guessed, PokemonViewModel mystery)

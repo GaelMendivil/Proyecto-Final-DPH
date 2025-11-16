@@ -3,7 +3,7 @@ namespace WhosThatPokemon.Models.ViewModels
     public class PokemonViewModel
     {
         public string? Name { get; set; }
-        public string? ImageUrl { get; set; }
+        public string ImageUrl { get; set; }
         public string? Type1 { get; set; }
         public string? Type2 { get; set; } // Puede ser null
         public int EvolutionStage { get; set; }
