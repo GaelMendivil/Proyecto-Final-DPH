@@ -9,10 +9,12 @@ namespace WhosThatPokemon.Services
     public class PokemonApiService : IPokemonApiService
     {
         private readonly HttpClient _httpClient;
+        private readonly IMemoryCache _cache;
 
-        public PokemonApiService(HttpClient httpClient)
+        public PokemonApiService(HttpClient httpClient, IMemoryCache memoryCache)
         {
             _httpClient = httpClient;
+            _cache = memoryCache;
         }
 
         public async Task<PokemonViewModel> GetPokemonDataAsync(string pokemonName)
@@ -110,7 +112,10 @@ namespace WhosThatPokemon.Services
         // Obtener la etapa evolutiva del Pokémon
         private async Task<int> GetEvolutionStage(string pokemonName, string evolutionChainUrl)
         {
-            try
+            string cacheKey = $"evo_{evolutionChainUrl}";
+
+            // Usamos 'object' para guardar los datos en el caché
+            if (!_cache.TryGetValue(cacheKey, out object evolutionDataObj))
             {
                 var response = await _httpClient.GetAsync(evolutionChainUrl);
                 if (!response.IsSuccessStatusCode)
@@ -123,6 +128,12 @@ namespace WhosThatPokemon.Services
             {
                 return 1;
             }
+
+            // Convertir el 'object' a 'dynamic' para poder leerlo
+            dynamic evolutionData = (dynamic)evolutionDataObj;
+
+            int stage = FindStageInChain(evolutionData.chain, pokemonName, 1);
+            return stage == 0 ? 1 : stage;
         }
 
         private int FindStageInChain(dynamic chain, string name, int stage)
