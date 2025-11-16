@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using WhosThatPokemon.Models.ViewModels;
 using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Extensions.Caching.Memory;
+using WhosThatPokemon.Controllers;
 
 namespace WhosThatPokemon.Services
 {
@@ -110,23 +113,28 @@ namespace WhosThatPokemon.Services
         }
 
         // Obtener la etapa evolutiva del Pokémon
-        private async Task<int> GetEvolutionStage(string pokemonName, string evolutionChainUrl)
+       private async Task<int> GetEvolutionStage(string pokemonName, string evolutionChainUrl)
         {
             string cacheKey = $"evo_{evolutionChainUrl}";
 
             // Usamos 'object' para guardar los datos en el caché
             if (!_cache.TryGetValue(cacheKey, out object evolutionDataObj))
             {
-                var response = await _httpClient.GetAsync(evolutionChainUrl);
-                if (!response.IsSuccessStatusCode)
-                    return 1;
+                // --- CORRECCIÓN AQUÍ ---
+                try
+                {
+                    var response = await _httpClient.GetAsync(evolutionChainUrl);
+                    if (!response.IsSuccessStatusCode)
+                        return 1;
 
-                dynamic data = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
-                return FindStageInChain(data.chain, pokemonName, 1);
-            }
-            catch
-            {
-                return 1;
+                    dynamic data = JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());
+                    return FindStageInChain(data.chain, pokemonName, 1);
+                }
+                catch // Ahora este 'catch' es válido porque sigue al 'try'
+                {
+                    return 1;
+                }
+                // --- FIN DE LA CORRECCIÓN ---
             }
 
             // Convertir el 'object' a 'dynamic' para poder leerlo
