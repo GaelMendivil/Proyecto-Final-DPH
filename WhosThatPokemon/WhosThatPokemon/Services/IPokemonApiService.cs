@@ -9,6 +9,5 @@ namespace WhosThatPokemon.Services
     {
         Task<PokemonViewModel> GetPokemonDataAsync(string pokemonName);
         Task<List<string>> GetAllPokemonNamesAsync();
-        Task<PokemonSearchViewModel> GetPokemonSearchDataAsync(string pokemonName);
     }
 }

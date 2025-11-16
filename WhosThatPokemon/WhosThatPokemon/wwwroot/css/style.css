@@ -1,4 +1,4 @@
-/* Fuentes para Pokemon */
+/* Fuentes para titulo */
 @font-face {
     font-family: 'Pokemon Solid';
     src: url('../fonts/Pokemon Solid.ttf') format('truetype');
@@ -9,7 +9,8 @@
     src: url('../fonts/Pokemon Hollow.ttf') format('truetype');
 }
 
-body {
+/*   Home      */
+body.home-page {
     background-image: url('../images/HomeBG.png');
     background-size: cover;
     background-position: center;
@@ -22,23 +23,21 @@ body {
     align-items: center;
 }
 
-/* Estilos para el titulo: "WHO'S THAT POKÉMON?" */
+/* Estilos para el título */
 .title-container {
     position: relative;
     text-align: center;
     padding-top: 10vh;
     width: 100%;
-    height: 25vh; 
+    height: 25vh;
 }
 
-/* Estilo base para ambas capas del título. */
 .pokemon-title {
     font-weight: normal;
     margin: 0;
     position: absolute;
     width: 100%;
 
-    /* Centrado de todo el bloque de título */
     top: 100%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -46,13 +45,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    line-height: 0.9; 
+    line-height: 0.9;
 }
-/* Titulo Hollow */
+
 .pokemon-title.hollow {
     font-family: 'Pokemon Hollow', sans-serif;
     color: #2a75bb;
-    -webkit-text-stroke: 15px #003a70; 
+    -webkit-text-stroke: 15px #003a70;
 
     text-shadow:
         3px 0 0 #003a70,
@@ -64,17 +63,16 @@ body {
         2px -2px 0 #003a70,
         -2px 2px 0 #003a70;
 
-    font-size: 7vw; /* Tamaño  del título hollow */
+    font-size: 7vw;
 }
 
-/* Titulo Solid */
 .pokemon-title.solid {
     font-family: 'Pokemon Solid', sans-serif;
     color: #FFCB05;
-    font-size: 7vw; /* Tamaño del título solid */
+    font-size: 7vw;
 }
 
-/* Estilos para el botón Iniciar */
+/* Botón */
 .start-button {
     padding: 18px 60px;
     font-size: 32px;
@@ -95,4 +93,19 @@ body {
     background-color: #4b1cb7;
     transform: translateY(-4px);
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+
+/*   ClassicGame   */
+
+body.classic-game-page {
+    background-image: url('../images/grass_background.png');
+    background-size: cover;
+    background-repeat: repeat-y;  
+    background-position: top center;
+    background-attachment: fixed; 
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }

@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="~/css/global.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
 </head>
-<body>
+
+<body class="@(ViewData["BodyClass"] ?? "")">
     @RenderBody()
 </body>
+
 </html>
