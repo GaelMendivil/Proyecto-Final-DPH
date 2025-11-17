@@ -2,16 +2,24 @@ using WhosThatPokemon.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddMemoryCache();
+
+
+builder.Services.AddHttpClient<IPokemonApiService, PokemonApiService>()
+    .SetHandlerLifetime(TimeSpan.FromMinutes(10)); // Evita crear miles de sockets
+
+// Servicio de precarga rápida 
+builder.Services.AddSingleton<IPokemonListService, PokemonListService>();
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient<IPokemonApiService, PokemonApiService>();
+
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
-
-builder.Services.AddMemoryCache(); 
 
 var app = builder.Build();
 
@@ -22,13 +30,9 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseSession();
-
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -36,4 +40,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-

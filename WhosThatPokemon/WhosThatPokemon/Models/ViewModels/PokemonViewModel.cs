@@ -34,4 +34,10 @@ namespace WhosThatPokemon.Models.ViewModels
         public bool HasGuessedCorrectly { get; set; } = false;
         public string? CurrentGuessName { get; set; } // Para el input del usuario
     }
+
+    public class ClassicGameFilterViewModel
+    {
+        public List<int> SelectedGenerations { get; set; } = new();
+    }
+
 }
