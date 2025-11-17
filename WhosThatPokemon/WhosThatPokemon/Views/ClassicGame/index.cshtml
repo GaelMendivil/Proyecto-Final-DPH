@@ -4,6 +4,10 @@
     ViewData["Title"] = "Classic Game";
     ViewData["BodyClass"] = "classic-game-page";
 }
+@{
+    List<int> selectedGens = ViewBag.SelectedGens as List<int> ?? new List<int>();
+}
+
 
 <style>
 
@@ -358,39 +362,39 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
 
 <div class="generation-filter-container">
     <div class="gen-switch-container">
-        <input type="checkbox" id="gen-1" class="gen-filter" value="1" checked>
+        <input type="checkbox" id="gen-1" class="gen-filter" name="gens" value="1"   @(selectedGens.Contains(1) ? "checked" : "")>
         <label for="gen-1" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" alt="Gen1"></label>
     </div>
     <div class="gen-switch-container">
-        <input type="checkbox" id="gen-2" class="gen-filter" value="2" checked>
+        <input type="checkbox" id="gen-2" class="gen-filter" name="gens" value="2" @(selectedGens.Contains(2) ? "checked" : "")>
         <label for="gen-2" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png" alt="Gen2"></label>
     </div>
     <div class="gen-switch-container">
-        <input type="checkbox" id="gen-3" class="gen-filter" value="3" checked>
+        <input type="checkbox" id="gen-3" class="gen-filter" name="gens" value="3" @(selectedGens.Contains(3) ? "checked" : "")>
         <label for="gen-3" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/258.png" alt="Gen3"></label>
     </div>
     <div class="gen-switch-container">
-        <input type="checkbox" id="gen-4" class="gen-filter" value="4" checked>
+        <input type="checkbox" id="gen-4" class="gen-filter" name="gens" value="4" @(selectedGens.Contains(4) ? "checked" : "")>
         <label for="gen-4" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/390.png" alt="Gen4"></label>
     </div>
     <div class="gen-switch-container">
-        <input type="checkbox" id="gen-5" class="gen-filter" value="5" checked>
+        <input type="checkbox" id="gen-5" class="gen-filter" name="gens" value="5" @(selectedGens.Contains(5) ? "checked" : "")>
         <label for="gen-5" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/495.png" alt="Gen5"></label>
     </div>
     <div class="gen-switch-container">
-        <input type="checkbox" id="gen-6" class="gen-filter" value="6" checked>
+        <input type="checkbox" id="gen-6" class="gen-filter" name="gens" value="6" @(selectedGens.Contains(6) ? "checked" : "")>
         <label for="gen-6" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/656.png" alt="Gen6"></label>
     </div>
     <div class="gen-switch-container">
-        <input type="checkbox" id="gen-7" class="gen-filter" value="7" checked>
+        <input type="checkbox" id="gen-7" class="gen-filter" name="gens" value="7" @(selectedGens.Contains(7) ? "checked" : "")>
         <label for="gen-7" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/725.png" alt="Gen7"></label>
     </div>
     <div class="gen-switch-container">
-        <input type="checkbox" id="gen-8" class="gen-filter" value="8" checked>
+        <input type="checkbox" id="gen-8" class="gen-filter" name="gens" value="8" @(selectedGens.Contains(8) ? "checked" : "")>
         <label for="gen-8" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/810.png" alt="Gen8"></label>
     </div>
     <div class="gen-switch-container">
-        <input type="checkbox" id="gen-9" class="gen-filter" value="9" checked>
+        <input type="checkbox" id="gen-9" class="gen-filter" name="gens" value="9" @(selectedGens.Contains(9) ? "checked" : "")>
         <label for="gen-9" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/912.png" alt="Gen9"></label>
     </div>
 
@@ -448,10 +452,18 @@ document.addEventListener("DOMContentLoaded", function() {
     const rerollButton = document.getElementById("reroll-button");
     if (rerollButton) {
         rerollButton.addEventListener("click", function() {
-            const checkedGens = document.querySelectorAll(".gen-filter:checked");
-            const params = new URLSearchParams();
-            checkedGens.forEach(c => params.append("gens", c.value));
-            window.location.href = `${window.location.pathname}?${params.toString()}`;
+        const checkedGens = document.querySelectorAll(".gen-filter:checked");
+        const params = new URLSearchParams();
+
+        checkedGens.forEach(c => params.append("gens", c.value));
+
+        // Si el usuario no selecciona nada, default a gen 1–9
+        if (![...checkedGens].length) {
+            for (let i = 1; i <= 9; i++) params.append("gens", i);
+        }
+
+        window.location.href = `/ClassicGame?${params.toString()}`;
+
         });
     }
 });
