@@ -7,14 +7,14 @@
 <style>
     body {
         background-color: #add8e6;
-        background-image: url('/images/Pokedex.png');
+        background-image: url('/images/PokedexBG.png');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
         height: 100vh;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         font-family: Arial, sans-serif;
         gap: 30px; 
         flex-wrap: wrap;
@@ -25,9 +25,22 @@
         padding: 25px;
         border-radius: 20px;
         box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-        width: 300px;
         min-height: 250px;
         text-align: center;
+    }
+
+    .box.description-box {
+        width: 460px;
+        margin-top: 400px;
+        margin-left: -55px;
+    }
+
+    .box.guess-box {
+        width: 360px;
+        margin-top: 400px;
+        margin-left: 250px;
+        min-height: 150px;
+        padding: 20px;
     }
 
     .description-box h2,
@@ -113,7 +126,7 @@
     }
 
     <div class="attempts">
-        Intentos: @ViewBag.Attempts
+        Intentos: @ViewBag.Attempts / 6
     </div>
 </div>
 
