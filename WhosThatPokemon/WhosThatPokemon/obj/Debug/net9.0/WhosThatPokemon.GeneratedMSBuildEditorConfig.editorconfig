@@ -9,49 +9,49 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = WhosThatPokemon
 build_property.RootNamespace = WhosThatPokemon
-build_property.ProjectDir = C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\
+build_property.ProjectDir = C:\Users\prisc\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon
+build_property.MSBuildProjectDirectory = C:\Users\prisc\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Usuario/Documents/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/ClassicGame/index.cshtml]
+[C:/Users/prisc/OneDrive/Documentos/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/ClassicGame/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xhc3NpY0dhbWVcaW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Games/index.cshtml]
+[C:/Users/prisc/OneDrive/Documentos/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Games/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2FtZXNcaW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Home/Index.cshtml]
+[C:/Users/prisc/OneDrive/Documentos/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/PokedexGame/index.cshtml]
+[C:/Users/prisc/OneDrive/Documentos/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/PokedexGame/index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9rZWRleEdhbWVcaW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Shared/Error.cshtml]
+[C:/Users/prisc/OneDrive/Documentos/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/prisc/OneDrive/Documentos/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/_ViewImports.cshtml]
+[C:/Users/prisc/OneDrive/Documentos/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/_ViewStart.cshtml]
+[C:/Users/prisc/OneDrive/Documentos/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Usuario/Documents/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Shared/_Layout.cshtml]
+[C:/Users/prisc/OneDrive/Documentos/GitHub/Proyecto-Final-DPH/WhosThatPokemon/WhosThatPokemon/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-4yt2513b9i
