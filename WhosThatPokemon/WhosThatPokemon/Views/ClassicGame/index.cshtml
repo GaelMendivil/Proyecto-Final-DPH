@@ -292,6 +292,11 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
 .game-over-message { font-size: 1.8em; color: #28a745; font-weight: bold; margin-top: 20px; text-shadow: 1px 1px 0px #000; }
 .error-message { color: #dc3545; font-weight: bold; margin-bottom: 15px; }
 
+.autocomplete-active {
+    background-color: #1d5fe0 !important; 
+    color: #ffffff !important;
+}
+
 </style>
 
 <a asp-controller="Games" asp-action="Index" class="back-button" title="Volver a Games" aria-label="Volver a Games">
@@ -426,10 +431,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const autocompleteList = document.getElementById("autocomplete-list");
     const searchUrl = container ? container.dataset.url : null;
 
+    let currentFocus = -1;
+
     if (input && searchUrl) {
+        
         input.addEventListener("input", async function() {
             let val = this.value;
-            closeAllLists();
+            
+            closeAllLists(); 
+            currentFocus = -1; 
+
             if (!val || val.length < 2) return;
 
             try {
@@ -444,10 +455,11 @@ document.addEventListener("DOMContentLoaded", function() {
                     itemDiv.innerHTML = `
                         <img src="${s.imageUrl || ''}" class="autocomplete-sprite" alt="${s.name}">
                         <span><strong>${s.name.substr(0, val.length)}</strong>${s.name.substr(val.length)}</span>
+                        <input type='hidden' value='${s.name}'> 
                     `;
 
                     itemDiv.addEventListener("click", function() {
-                        input.value = s.name;
+                        input.value = this.getElementsByTagName("input")[0].value;
                         closeAllLists();
                     });
 
@@ -458,9 +470,50 @@ document.addEventListener("DOMContentLoaded", function() {
                 console.error(error);
             }
         });
+
+        input.addEventListener("keydown", function(e) {
+            let list = document.getElementById("autocomplete-list");
+            if (list) list = list.getElementsByTagName("div");
+            
+            if (e.keyCode == 40) { 
+                currentFocus++;
+                addActive(list);
+            } else if (e.keyCode == 38) { 
+                currentFocus--;
+                addActive(list);
+            } else if (e.keyCode == 13) { 
+                if (currentFocus > -1) {
+                    if (list) {
+                        e.preventDefault(); 
+                        list[currentFocus].click();
+                    }
+                }
+            }
+        });
     }
 
-    function closeAllLists() { if (autocompleteList) autocompleteList.innerHTML = ''; }
+    function addActive(x) {
+        if (!x) return false;
+        removeActive(x); 
+
+        if (currentFocus >= x.length) currentFocus = 0; 
+        if (currentFocus < 0) currentFocus = (x.length - 1); 
+
+        x[currentFocus].classList.add("autocomplete-active");
+        
+        x[currentFocus].scrollIntoView({ block: 'nearest', inline: 'start' });
+    }
+
+    function removeActive(x) {
+        for (let i = 0; i < x.length; i++) {
+            x[i].classList.remove("autocomplete-active");
+        }
+    }
+
+    function closeAllLists() {
+        if (autocompleteList) autocompleteList.innerHTML = '';
+        currentFocus = -1;
+    }
 
     document.addEventListener("click", e => {
         if (input && e.target !== input) closeAllLists();
@@ -469,18 +522,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const rerollButton = document.getElementById("reroll-button");
     if (rerollButton) {
         rerollButton.addEventListener("click", function() {
-        const checkedGens = document.querySelectorAll(".gen-filter:checked");
-        const params = new URLSearchParams();
-
-        checkedGens.forEach(c => params.append("gens", c.value));
-
-        // Si el usuario no selecciona nada, default a gen 1–9
-        if (![...checkedGens].length) {
-            for (let i = 1; i <= 9; i++) params.append("gens", i);
-        }
-
-        window.location.href = `/ClassicGame?${params.toString()}`;
-
+            const checkedGens = document.querySelectorAll(".gen-filter:checked");
+            const params = new URLSearchParams();
+            checkedGens.forEach(c => params.append("gens", c.value));
+            if (![...checkedGens].length) {
+                for (let i = 1; i <= 9; i++) params.append("gens", i);
+            }
+            window.location.href = `/ClassicGame?${params.toString()}`;
         });
     }
 });
