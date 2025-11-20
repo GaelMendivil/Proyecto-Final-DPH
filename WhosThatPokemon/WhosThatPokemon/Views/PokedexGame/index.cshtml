@@ -77,13 +77,15 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
-        height: 100vh;
+        background-attachment: fixed;
+        min-height: 100vh;
         display: flex;
         justify-content: center;
         align-items: flex-start;
         font-family: Arial, sans-serif;
         gap: 30px;
         flex-wrap: wrap;
+        padding-bottom: 50px;
     }
 
     .box {
@@ -210,7 +212,7 @@
 </div>
 
 <div class="box description-box">
-    <h2>Descripción y Pistas</h2>
+    <h2>Description and Clues</h2>
 
     @if(ViewBag.Description != null)
     {
@@ -224,7 +226,7 @@
 
     @if(ViewBag.ShowType == true && ViewBag.Type != null)
     {
-        <div class="pokemon-type">Tipo: @ViewBag.Type</div>
+        <div class="pokemon-type">Type: @ViewBag.Type</div>
     }
 
     @if(ViewBag.Sprite != null)
@@ -235,19 +237,19 @@
     }
 
     <div class="attempts">
-        Intentos: @ViewBag.Attempts / 6
+        Attempts: @ViewBag.Attempts / 6
     </div>
 </div>
 
 <div class="box guess-box">
     <div class="title-panel">
-        <h2>Adivina el Pokémon</h2>
+        <h2>Guess the Pokémon</h2>
     </div>
 
     <div class="right-panel">
         <form asp-action="Guess" asp-controller="PokedexGame" method="post">
-            <input type="text" name="guess" id="guessBox" placeholder="Inserta un nombre..." required />
-            <button type="submit">Adivinar</button>
+            <input type="text" name="guess" id="guessBox" placeholder="Insert a name..." required />
+            <button type="submit">Guess</button>
         </form>
     </div>
 </div>
