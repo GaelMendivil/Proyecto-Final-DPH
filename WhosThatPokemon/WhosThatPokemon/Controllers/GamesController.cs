@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WhosThatPokemon.Controllers
 {
+    [Authorize]
     public class GamesController : Controller
     {
         public IActionResult Index()

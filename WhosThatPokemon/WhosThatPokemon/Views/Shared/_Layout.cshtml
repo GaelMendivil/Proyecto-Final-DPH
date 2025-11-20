@@ -7,10 +7,12 @@
     
     <link rel="stylesheet" href="~/css/global.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/auth.css" asp-append-version="true" /> 
 </head>
 
 <body class="@(ViewData["BodyClass"] ?? "")">
     @RenderBody()
-</body>
 
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
 </html>

@@ -1,0 +1,201 @@
+body.games-page-background {
+    background-image: url('../images/Games.png');
+    background-size: cover;
+    background-position: center;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start; 
+    
+    min-height: 100vh;
+    padding-top: 0; 
+    overflow-y: auto; 
+}
+
+body.games-page-background .title-container {
+    margin-top: 8vh; 
+    margin-bottom: 4rem; 
+    
+    position: relative;
+    z-index: 10;
+}
+
+body.games-page-background .pokemon-title {
+    font-size: 4rem; 
+    line-height: 1.2; 
+}
+
+.form-wrapper {
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 30px 40px;
+    border-radius: 20px; 
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+
+    width: 90%; 
+    max-width: 420px; 
+    margin-bottom: 50px; 
+    backdrop-filter: blur(5px); 
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.pokemon-label {
+    color: #fff;
+    font-family: 'Arial Black', Gadget, sans-serif;
+    font-size: 1em;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    letter-spacing: 1px;
+}
+
+.pokemon-input {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 3px solid #2f63d3; 
+    border-radius: 10px;
+    padding: 12px 15px;
+    font-size: 1em;
+    color: #333;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+}
+
+.pokemon-input:focus {
+    border-color: #ffcb05; 
+    box-shadow: 0px 0px 10px rgba(255, 203, 5, 0.6);
+    outline: none;
+    transform: scale(1.02);
+}
+
+.validation-message {
+    color: #ff6b6b;
+    font-size: 0.85em;
+    margin-top: 5px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.validation-summary {
+    color: #ff6b6b;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+    background: rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+
+.start-button.register-button,
+.start-button.login-button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 12px 0;
+    font-size: 22px;
+    text-align: center;
+    display: block; 
+}
+
+.start-button.register-button {
+    background-color: #2f63d3;
+    border-color: #162c68;
+}
+
+.start-button.login-button {
+    background-color: #4CAF50;
+    border-color: #388E3C;
+}
+
+.start-button.register-button:hover,
+.start-button.login-button:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+}
+
+.pokemon-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+    background: rgba(255,255,255,0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.pokemon-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #2f63d3;
+    cursor: pointer;
+}
+
+.pokemon-label-checkbox {
+    color: #fff;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+.footer-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.footer-link p {
+    color: #ddd;
+    font-size: 0.95em;
+}
+
+.pokemon-link {
+    color: #ffcb05;
+    text-decoration: none;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.pokemon-link:hover {
+    color: #fff;
+    text-shadow: 0 0 5px #ffcb05;
+}
+
+.back-button {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1400;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(180deg,#1d5fe0,#124aa8);
+    color: #fff;
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: 800;
+    border: 3px solid rgba(10,40,120,0.9);
+    box-shadow: 0 6px 14px rgba(10,40,120,0.28);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+.back-button:hover, .back-button:focus {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 18px rgba(10,40,120,0.36);
+    color: #fff; 
+}

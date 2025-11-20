@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WhosThatPokemon.Controllers
 {
     [Route("[controller]")]
+    [Authorize]
     public class PokedexGameController : Controller
     {
         private readonly HttpClient _httpClient;

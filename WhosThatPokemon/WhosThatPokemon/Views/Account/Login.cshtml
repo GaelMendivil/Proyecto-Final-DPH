@@ -1,0 +1,49 @@
+@model WhosThatPokemon.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+    ViewData["BodyClass"] = "games-page-background";
+}
+
+<a asp-controller="Home" asp-action="Index" class="back-button">←</a>
+
+<div class="title-container">
+    <h1 class="pokemon-title hollow">
+        <span>LOG IN</span>
+    </h1>
+    <h1 class="pokemon-title solid">
+        <span>LOG IN</span>
+    </h1>
+</div>
+
+<div class="form-wrapper">
+    <form asp-action="Login" method="post" class="auth-form">
+        <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+        <div class="form-group">
+            <label asp-for="EmailOrUser" class="form-label pokemon-label">Username or Email</label>
+            <input asp-for="EmailOrUser" class="form-control pokemon-input" />
+            <span asp-validation-for="EmailOrUser" class="text-danger validation-message"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Password" class="form-label pokemon-label">Password</label>
+            <input asp-for="Password" class="form-control pokemon-input" />
+            <span asp-validation-for="Password" class="text-danger validation-message"></span>
+        </div>
+
+        <div class="form-check pokemon-check">
+            <input asp-for="RememberMe" class="form-check-input pokemon-checkbox" />
+            <label asp-for="RememberMe" class="form-check-label pokemon-label-checkbox">Remember me</label>
+        </div>
+
+        <button type="submit" class="start-button login-button">LOGIN</button>
+    </form>
+    <div class="footer-link">
+        <p>Don't have an account? <a asp-action="Register" class="pokemon-link">Sign up free</a></p>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
