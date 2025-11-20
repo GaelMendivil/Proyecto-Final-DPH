@@ -268,8 +268,24 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
 }
 
 .guess-square.green { background-color: #28a745; }
-.guess-square.red { background-color: #dc3545; }
+.guess-square.red, .guess-square.red-up, .guess-square.red-down { background-color: #dc3545; position: relative; }
 .guess-square.yellow { background-color: #ffc107; }
+
+.guess-square.red-up::after {
+    content: '▲'; 
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    bottom: 2px; 
+}
+
+.guess-square.red-down::after {
+    content: '▼';
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    bottom: 2px;
+}
 
 .pokemon-image { width: 90px; height: 90px; object-fit: contain; }
 

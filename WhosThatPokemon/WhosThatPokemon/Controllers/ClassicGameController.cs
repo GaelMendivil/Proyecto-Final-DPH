@@ -49,57 +49,67 @@
             {
                 HttpContext.Session.Set("Filters", filters);
             }
+
             // GET: INDEX 
-            [HttpGet]
-            public async Task<IActionResult> Index([FromQuery] List<int> gens)
+        [HttpGet]
+        public async Task<IActionResult> Index([FromQuery] List<int> gens)
+        {
+            // Si el servicio aún está descargando datos, mandamos al usuario a la sala de espera
+            if (!_pokemonListService.IsDataLoaded)
             {
-                var filters = GetFilters();
-
-                // Si la URL trae 'gens', los usamos y guardamos en sesión.
-                if (gens != null && gens.Any())
-                {
-                    filters.SelectedGenerations = gens;
-                }
-                
-                SaveFilters(filters); // Guardamos los filtros actualizados
-
-                // Usar el servicio para obtener un Pokémon aleatorio filtrado
-                var mysteryPokemon = await _pokemonListService.GetRandomAsync(filters.SelectedGenerations);
-
-                if (mysteryPokemon == null)
-                {
-                    var allGens = Enumerable.Range(1, 9).ToList();
-                    mysteryPokemon = await _pokemonListService.GetRandomAsync(allGens);
-
-                    if (mysteryPokemon == null) {
-                        TempData["ErrorMessage"] = "Error: No se pudo cargar ningún Pokémon de la API.";
-                        return View(new GameSessionViewModel());
-                    }
-                }
-
-                // Guardar el Pokémon misterioso
-                HttpContext.Session.Set("MysteryPokemon", mysteryPokemon);
-                HttpContext.Session.Remove("CurrentGuesses");
-
-                var gameSession = new GameSessionViewModel
-                {
-                    Guesses = new List<GuessResultViewModel>()
-                };
-
-                // Pasar los filtros a la vista para que los switches se marquen
-                ViewBag.SelectedGens = filters.SelectedGenerations;
-
-                return View(gameSession);
+                return View("Loading");
             }
 
+            var filters = GetFilters();
 
+            // Si la URL trae 'gens', los usamos y guardamos en sesión.
+            if (gens != null && gens.Any())
+            {
+                filters.SelectedGenerations = gens;
+            }
+            
+            SaveFilters(filters); 
+
+            // Usar el servicio para obtener un Pokémon aleatorio filtrado
+            var mysteryPokemon = await _pokemonListService.GetRandomAsync(filters.SelectedGenerations);
+
+            if (mysteryPokemon == null)
+            {
+                // Intento de fallback si no hay pokemones en el filtro seleccionado
+                var allGens = Enumerable.Range(1, 9).ToList();
+                mysteryPokemon = await _pokemonListService.GetRandomAsync(allGens);
+
+                if (mysteryPokemon == null) {
+                    TempData["ErrorMessage"] = "Error: No se pudo cargar ningún Pokémon de la API. Intenta recargar en unos momentos.";
+                    return View(new GameSessionViewModel());
+                }
+            }
+
+            // Guardar el Pokémon misterioso
+            HttpContext.Session.Set("MysteryPokemon", mysteryPokemon);
+            HttpContext.Session.Remove("CurrentGuesses");
+
+            var gameSession = new GameSessionViewModel
+            {
+                Guesses = new List<GuessResultViewModel>()
+            };
+
+            ViewBag.SelectedGens = filters.SelectedGenerations;
+
+            return View(gameSession);
+        }
+
+        [HttpGet]
+        public IActionResult CheckStatus()
+        {
+            return Json(new { ready = _pokemonListService.IsDataLoaded });
+        }
 
             // POST: GUESS 
             [HttpPost]
             public async Task<IActionResult> Guess(GameSessionViewModel model)
             {
                 var filters = GetFilters();
-                // Pasar los filtros al ViewBag en cada recarga de vista
                 ViewBag.SelectedGens = filters.SelectedGenerations;
 
                 var guessedPokemonName = model.CurrentGuessName;
@@ -134,7 +144,7 @@
                 {
                     TempData["ErrorMessage"] = $"El Pokémon '{guessedPokemonName}' no pertenece a las generaciones seleccionadas.";
                     model.Guesses = currentGuesses;
-                    return View("Index", model); // Devuelve la vista con el error y los filtros
+                    return View("Index", model); 
                 }
 
                 var guessedPokemon = tempDataPokemon;
@@ -225,7 +235,12 @@
                     result.ColorColor = "red";
 
                 result.EvolutionStageColor = guessed.EvolutionStage == mystery.EvolutionStage ? "green" : "red";
-                result.GenerationColor = guessed.Generation == mystery.Generation ? "green" : "red";
+                if (guessed.Generation == mystery.Generation)
+                    result.GenerationColor = "green";
+                else if (guessed.Generation < mystery.Generation)
+                    result.GenerationColor = "red-up"; 
+                else
+                    result.GenerationColor = "red-down";
 
                 if (System.Math.Abs(guessed.Height - mystery.Height) < 0.1)
                     result.HeightColor = "green";

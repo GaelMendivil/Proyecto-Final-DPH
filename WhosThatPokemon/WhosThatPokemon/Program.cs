@@ -34,6 +34,7 @@ builder.Services.AddHttpClient<IPokemonApiService, PokemonApiService>()
     .SetHandlerLifetime(TimeSpan.FromMinutes(10)); 
 
 builder.Services.AddSingleton<IPokemonListService, PokemonListService>();
+builder.Services.AddHostedService<DataInitializerService>();
 
 builder.Services.AddControllersWithViews();
 
