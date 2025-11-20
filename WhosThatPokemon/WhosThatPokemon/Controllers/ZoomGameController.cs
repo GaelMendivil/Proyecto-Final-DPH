@@ -4,10 +4,11 @@ using System.Text.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Collections.Generic;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace WhosThatPokemon.Controllers
 {
+    [Authorize]
     public class ZoomGameController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

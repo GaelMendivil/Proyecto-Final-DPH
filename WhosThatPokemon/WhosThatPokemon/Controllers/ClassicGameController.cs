@@ -1,14 +1,16 @@
     using Microsoft.AspNetCore.Mvc;
-    using WhosThatPokemon.Models.ViewModels; // <-- AÑADIDO: Para usar ClassicGameFilterViewModel
+    using WhosThatPokemon.Models.ViewModels; 
     using WhosThatPokemon.Services;
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.AspNetCore.Http;
     using Newtonsoft.Json;
+    using Microsoft.AspNetCore.Authorization;
 
     namespace WhosThatPokemon.Controllers
     {
+        [Authorize]
         public class PokemonSearchViewModel
         {
             [JsonProperty("name")]
@@ -16,7 +18,7 @@
             [JsonProperty("imageUrl")]
             public string ImageUrl { get; set; }
         }
-
+        [Authorize]
         public class ClassicGameController : Controller
         {
             private readonly IPokemonListService _pokemonListService;
@@ -33,11 +35,9 @@
                 if (filters == null)
                 {
                     filters = new ClassicGameFilterViewModel();
-                    // Poner todas las generaciones por defecto si la sesión está vacía
                     filters.SelectedGenerations = Enumerable.Range(1, 9).ToList();
                     HttpContext.Session.Set("Filters", filters);
                 }
-                // Asegurarse de que si la sesión existe pero sin gens, se pongan todas
                 else if (!filters.SelectedGenerations.Any())
                 {
                     filters.SelectedGenerations = Enumerable.Range(1, 9).ToList();
@@ -60,14 +60,12 @@
                 {
                     filters.SelectedGenerations = gens;
                 }
-                // Si no, GetFilters() ya nos dio los de la sesión o todos por defecto.
                 
                 SaveFilters(filters); // Guardamos los filtros actualizados
 
                 // Usar el servicio para obtener un Pokémon aleatorio filtrado
                 var mysteryPokemon = await _pokemonListService.GetRandomAsync(filters.SelectedGenerations);
 
-                // Fallback: Si el filtro no devuelve nada 
                 if (mysteryPokemon == null)
                 {
                     var allGens = Enumerable.Range(1, 9).ToList();
@@ -108,7 +106,6 @@
                 if (string.IsNullOrWhiteSpace(guessedPokemonName))
                 {
                     TempData["ErrorMessage"] = "Por favor, introduce un nombre de Pokémon.";
-                    // Al redirigir a Index se re-cargan los filtros correctos
                     return RedirectToAction(nameof(Index)); 
                 }
 
@@ -189,7 +186,7 @@
                 return Json(results);
             }
 
-            // ComparePokemon 
+            // Comparar Pokemon guessed vs mystery  
             private GuessResultViewModel ComparePokemon(PokemonViewModel guessed, PokemonViewModel mystery)
             {
                 var result = new GuessResultViewModel
@@ -250,6 +247,7 @@
         }
 
         // Extensiones de sesion 
+        [Authorize]
         public static class SessionExtensions
         {
             public static void Set<T>(this ISession session, string key, T value)

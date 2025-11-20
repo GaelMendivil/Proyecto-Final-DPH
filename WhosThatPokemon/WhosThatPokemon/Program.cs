@@ -1,15 +1,38 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using WhosThatPokemon.Data; 
 using WhosThatPokemon.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => 
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 4; 
+    options.User.RequireUniqueEmail = true;
+})
+.AddEntityFrameworkStores<ApplicationDbContext>()
+.AddDefaultTokenProviders();
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login"; 
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+
 
 builder.Services.AddMemoryCache();
 
-
 builder.Services.AddHttpClient<IPokemonApiService, PokemonApiService>()
-    .SetHandlerLifetime(TimeSpan.FromMinutes(10)); // Evita crear miles de sockets
+    .SetHandlerLifetime(TimeSpan.FromMinutes(10)); 
 
-// Servicio de precarga rápida 
 builder.Services.AddSingleton<IPokemonListService, PokemonListService>();
 
 builder.Services.AddControllersWithViews();
@@ -31,10 +54,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseRouting();
-app.UseSession();
-app.UseAuthorization();
 
+app.UseRouting();
+
+app.UseSession(); 
+
+app.UseAuthentication(); 
+app.UseAuthorization();  
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,0 +1,41 @@
+<form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="logout-container">
+    <button type="submit" class="master-ball-btn" title="Cerrar Sesión" onclick="return confirm('Are you sure you want to log out, trainer?');">
+        <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/master-ball.png" alt="Cerrar Sesión" />
+    </button>
+</form>
+
+<style>
+    .logout-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1500;
+    }
+
+    .master-ball-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+    }
+
+    .master-ball-btn img {
+        width: 60px;
+        height: 60px;
+        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    }
+
+    .master-ball-btn:hover {
+        transform: scale(1.2) rotate(10deg);
+    }
+
+    .master-ball-btn:hover img {
+        filter: drop-shadow(0 0 15px rgba(166, 89, 242, 0.8)); 
+    }
+
+    .master-ball-btn:active {
+        transform: scale(0.9);
+    }
+</style>
