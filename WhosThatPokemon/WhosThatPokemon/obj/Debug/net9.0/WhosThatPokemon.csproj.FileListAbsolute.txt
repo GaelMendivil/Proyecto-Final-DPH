@@ -325,7 +325,6 @@ C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\Who
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\scopedcss\projectbundle\WhosThatPokemon.bundle.scp.css
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\ep5iix8zaa-ezitwh0vem.gz
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\mm0x8b5bve-b9sayid5wm.gz
-C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\13yp54lkkn-wm10a186p7.gz
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\iydrblmc6a-61n19gt1b8.gz
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\vfc7m6bplk-xtxxf3hu2r.gz
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\w37i2mm2ka-t1cqhe9u97.gz
@@ -372,8 +371,6 @@ C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\Who
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\gry7fpdcdb-h1s4sie4z3.gz
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\pzhmd57ztk-4d85u1mtcx.gz
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\n3b5pz6icv-0j3bgjxly4.gz
-C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\e2cdl0ilow-03hjc8e09r.gz
-C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\gdzafwqw4i-48y08845bh.gz
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\us9kb0fy48-356vix0kms.gz
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\y30ywv30ak-83jwlth58m.gz
 C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\6cc6br0q79-mrlpezrjn3.gz
@@ -801,3 +798,4 @@ C:\Users\prisc\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\Who
 C:\Users\prisc\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\WhosThatPokemon.pdb
 C:\Users\prisc\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\WhosThatPokemon.genruntimeconfig.cache
 C:\Users\prisc\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\ref\WhosThatPokemon.dll
+C:\Users\almaz\OneDrive\Documentos\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\13yp54lkkn-eo7gusbwfn.gz

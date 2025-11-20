@@ -18,5 +18,9 @@ namespace WhosThatPokemon.Controllers
         {
             return View(); 
         }
+        public IActionResult Zoom()
+        {
+            return View(); 
+        }
     }
 }
