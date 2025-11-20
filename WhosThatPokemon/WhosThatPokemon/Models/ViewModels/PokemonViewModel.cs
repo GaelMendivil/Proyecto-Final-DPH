@@ -17,7 +17,6 @@ namespace WhosThatPokemon.Models.ViewModels
 
     public class GuessResultViewModel : PokemonViewModel
     {
-        // Propiedades para indicar el color de cada celda
         public string? Type1Color { get; set; } // "green", "red", "yellow"
         public string? Type2Color { get; set; }
         public string? EvolutionStageColor { get; set; }

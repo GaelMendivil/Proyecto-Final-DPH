@@ -2,15 +2,21 @@
 
 @{
     ViewData["Title"] = "Pokedex Game";
+    bool isGameOver = ViewBag.IsGameOver == true;
 }
+
+<a asp-controller="Games" asp-action="Index" class="back-button" title="Back to Games" aria-label="Back to Games">
+    &#8592;
+</a>
 
 <partial name="_LogoutBall" />
 
 <style>
+
     .title-container {
         position: relative;
         text-align: center;
-        padding-top: 10vh;
+        padding-top: 12vh;
         width: 100%;
         height: 25vh;
     }
@@ -81,7 +87,7 @@
         min-height: 100vh;
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: flex-start; 
         font-family: Arial, sans-serif;
         gap: 30px;
         flex-wrap: wrap;
@@ -92,24 +98,30 @@
         background-color: rgba(255, 255, 255, 0.9);
         padding: 25px;
         border-radius: 20px;
-        min-height: 250px;
         text-align: center;
     }
 
     .box.description-box {
         width: 460px;
-        margin-top: 50px;
+        margin-top: 80px; 
         margin-left: -55px;
         font-size: 20px;
         background-color: transparent;
+        
+        min-height: 250px; 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .box.guess-box {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: center;
         width: 360px;
-        margin-top: 53px;
+        margin-top: 83px; 
         margin-left: 250px;
         padding: 0;
         background-color: transparent;
@@ -147,32 +159,98 @@
     .description {
         font-style: italic;
         color: #333;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+
+    .clue-text {
+        font-weight: bold;
+        margin-top: 10px;
+        color: #003a70;
     }
 
     .message {
         font-weight: bold;
+        margin-top: 15px;
         margin-bottom: 10px;
         color: #f04e30;
+        font-size: 1.1em;
     }
 
-    .pokemon-type {
-        font-weight: bold;
-        text-transform: capitalize;
+    .pokemon-sprite {
+        position: relative; 
+        margin-top: 15px;
         margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
     }
 
     .pokemon-sprite img {
         max-width: 150px;
-        margin-top: 10px;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .autocomplete-container {
+        position: relative;
+        width: 80%; 
+        margin-bottom: 15px; 
     }
 
     .guess-box input[type="text"] {
         padding: 10px;
-        width: 80%;
+        width: 100%;
         border-radius: 10px;
         border: 1px solid #ccc;
-        margin-bottom: 15px;
+        box-sizing: border-box; 
+        margin-bottom: 0;
+    }
+
+    .guess-box input[type="text"]:disabled {
+        background-color: #e0e0e0;
+        color: #888;
+        cursor: not-allowed;
+    }
+
+    .autocomplete-items {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 5000;
+        border: 1px solid #999;
+        background-color: #fff;
+        max-height: 250px;
+        overflow-y: auto;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        text-align: left;
+    }
+
+    .autocomplete-items div {
+        padding: 8px 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+        display: flex;
+        align-items: center;
+    }
+
+    .autocomplete-items div:hover {
+        background-color: #e9e9e9;
+    }
+
+    .autocomplete-active {
+        background-color: #1d5fe0 !important;
+        color: #ffffff !important;
+    }
+    
+    .autocomplete-sprite {
+        width: 40px; 
+        height: 40px; 
+        object-fit: contain; 
+        image-rendering: pixelated;
+        margin-right: 10px;
     }
 
     .guess-box button {
@@ -184,21 +262,34 @@
         font-weight: bold;
         cursor: pointer;
         width: 80%;
+        display: block; 
     }
 
     .guess-box button:hover {
         background-color: #d03d25;
     }
 
+    .guess-box button:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+    }
+    .guess-box button:disabled:hover {
+        background-color: #95a5a6;
+    }
+
     .attempts {
         margin-top: 15px;
         font-weight: bold;
     }
+    
+    .new-game-btn {
+        margin-top: 10px;
+        background-color: #2980b9 !important;
+    }
+    .new-game-btn:hover {
+        background-color: #1c6ea4 !important;
+    }
 </style>
-
-<a asp-controller="Games" asp-action="Index" class="back-button" title="Volver a Games" aria-label="Volver a Games">
-    &#8592;
-</a>
 
 <div class="title-container">
     <h1 class="pokemon-title hollow">
@@ -216,17 +307,22 @@
 
     @if(ViewBag.Description != null)
     {
-        <div class="description">@ViewBag.Description</div>
+        <div class="description">"@ViewBag.Description"</div>
     }
 
-    @if(ViewBag.Message != null)
+    @if(ViewBag.ShowId == true)
     {
-        <div class="message">@ViewBag.Message</div>
+        <div class="clue-text">Pokedex No: @ViewBag.PokedexId</div>
     }
 
     @if(ViewBag.ShowType == true && ViewBag.Type != null)
     {
-        <div class="pokemon-type">Type: @ViewBag.Type</div>
+        <div class="clue-text">Type: @ViewBag.Type</div>
+    }
+    
+    @if(ViewBag.Message != null)
+    {
+        <div class="message">@ViewBag.Message</div>
     }
 
     @if(ViewBag.Sprite != null)
@@ -247,79 +343,35 @@
     </div>
 
     <div class="right-panel">
-        <form asp-action="Guess" asp-controller="PokedexGame" method="post">
-            <input type="text" name="guess" id="guessBox" placeholder="Insert a name..." required />
-            <button type="submit">Guess</button>
+        <form asp-action="Guess" asp-controller="PokedexGame" method="post" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+            
+            <div class="autocomplete-container" data-url="@Url.Action("SearchPokemon", "PokedexGame")">
+                <input type="text" 
+                       name="guess" 
+                       id="guessBox" 
+                       placeholder="Insert a name..." 
+                       autocomplete="off" 
+                       required 
+                       @(isGameOver ? "disabled" : "") />
+                <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
+
+            <button type="submit" @(isGameOver ? "disabled" : "")>Guess</button>
+        </form>
+        
+        <form asp-action="Index" asp-controller="PokedexGame" method="get" style="width:100%; display:flex; justify-content:center;">
+             <button type="submit" class="new-game-btn">New Pokémon</button>
         </form>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+<script src="~/js/pokemon-autocomplete.js"></script>
 
-<script>
-(function($){
-    $(function() {
-        const url = '@Url.Action("SearchPokemon", "PokedexGame")';
-
-        function normalizeItem(item){
-            return {
-                label: item.name || item.Name || item.label || "",
-                value: item.name || item.Name || item.value || "",
-                image: item.imageUrl || item.ImageUrl || item.image || ""
-            };
-        }
-
-        $("#guessBox").autocomplete({
-            source: function(request, response) {
-                console.log("Autocomplete request:", request.term);
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    data: { term: request.term },
-                    dataType: 'json',
-                    success: function(data) {
-                        console.log("Autocomplete response:", data);
-
-                        if (!Array.isArray(data)) {
-                            response([]);
-                            return;
-                        }
-
-                        const items = data.map(normalizeItem).slice(0, 10);
-                        response(items);
-                    },
-                    error: function(xhr, status, err) {
-                        console.error("Autocomplete AJAX error:", status, err, xhr.responseText);
-                        response([]);
-                    }
-                });
-            },
-            minLength: 2,
-            focus: function(event, ui) {
-                event.preventDefault();
-                $("#guessBox").val(ui.item.value);
-            },
-            select: function(event, ui) {
-                $("#guessBox").val(ui.item.value);
-                return false;
-            }
-        })
-        .autocomplete("instance")._renderItem = function(ul, item) {
-            const $li = $("<li>");
-            const $wrap = $("<div>").addClass("ui-menu-item-wrapper");
-            const $img = $("<img>")
-                .attr("src", item.image || "/images/placeholder.png")
-                .attr("alt", item.value)
-                .css({ width: "40px", height: "40px" });
-
-            const $text = $("<span>").text(item.label);
-
-            $wrap.append($img).append($text);
-            $li.append($wrap);
-            return $li.appendTo(ul);
-        };
-    });
-})(jQuery);
-</script>
+@if (!isGameOver)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setupPokemonAutocomplete("guessBox", "autocomplete-list", "autocomplete-container");
+        });
+    </script>
+}

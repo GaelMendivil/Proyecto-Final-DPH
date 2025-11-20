@@ -5,6 +5,8 @@ using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using WhosThatPokemon.Models.ViewModels; 
+using WhosThatPokemon.Services;
 
 namespace WhosThatPokemon.Controllers
 {
@@ -12,10 +14,12 @@ namespace WhosThatPokemon.Controllers
     public class ZoomGameController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IPokemonListService _pokemonListService;
 
-        public ZoomGameController(IHttpClientFactory httpClientFactory)
+        public ZoomGameController(IHttpClientFactory httpClientFactory, IPokemonListService pokemonListService)
         {
             _httpClientFactory = httpClientFactory;
+            _pokemonListService = pokemonListService;
         }
 
         public async Task<IActionResult> Index()
@@ -43,37 +47,33 @@ namespace WhosThatPokemon.Controllers
             ViewBag.Sprite = sprite;
             ViewBag.Attempts = 0;
             ViewBag.ZoomLevel = 10;
+            ViewBag.IsGameOver = false; 
 
             return View("Index");
         }
-[HttpGet]
-[Route("/ZoomGame/SearchPokemon")]
-public async Task<IActionResult> SearchPokemon(string term)
-{
-    if (string.IsNullOrEmpty(term) || term.Length < 2)
-        return Json(new List<PokemonSearchViewModel>());
 
-    string url = "https://pokeapi.co/api/v2/pokemon?limit=2000";
-
-    var client = _httpClientFactory.CreateClient();
-    var response = await client.GetStringAsync(url);
-
-    var json = JObject.Parse(response);
-
-    var results = json["results"]
-        .Where(p => p["name"].ToString().IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0)
-        .Select(p => new PokemonSearchViewModel
+        [HttpGet]
+        [Route("/ZoomGame/SearchPokemon")]
+        public async Task<IActionResult> SearchPokemon(string term)
         {
-            Name = p["name"].ToString(),
-            ImageUrl = $"https://img.pokemondb.net/sprites/home/normal/{p["name"]}.png"
-        })
-        .Take(7)
-        .ToList();
+            if (string.IsNullOrEmpty(term) || term.Length < 2)
+            {
+                return Json(new List<object>());
+            }
+            var allGens = new List<int>(); 
+            var results = await _pokemonListService.SearchAsync(term, allGens);
 
-    return Json(results);
-}
+            var jsonResults = results
+                .Select(p => new 
+                {
+                    name = p.Name,
+                    imageUrl = p.ImageUrl 
+                })
+                .Take(10) 
+                .ToList();
 
-
+            return Json(jsonResults);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Guess(string guess)
@@ -82,29 +82,45 @@ public async Task<IActionResult> SearchPokemon(string term)
             int? attempts = HttpContext.Session.GetInt32("Attempts");
             int? zoom = HttpContext.Session.GetInt32("ZoomLevel");
             string pokemonName = HttpContext.Session.GetString("PokemonName");
+            bool isGameOver = false;
 
             if (id == null)
                 return RedirectToAction("Index");
 
-            attempts++;
-            HttpContext.Session.SetInt32("Attempts", attempts.Value);
+            guess = guess ?? ""; 
 
-            bool correct = string.Equals(guess, pokemonName, StringComparison.OrdinalIgnoreCase);
+            bool correct = string.Equals(guess.Trim(), pokemonName, StringComparison.OrdinalIgnoreCase);
 
             if (correct)
             {
-                ViewBag.Message = $"¡Correcto! Era {pokemonName}.";
-                ViewBag.ZoomLevel = 0;
+                ViewBag.Message = $"Correct! It was {pokemonName}.";
+                
+                zoom = 0; 
+                HttpContext.Session.SetInt32("ZoomLevel", 0);
+                
+                isGameOver = true;
             }
             else
             {
+                attempts++;
+                HttpContext.Session.SetInt32("Attempts", attempts.Value);
+
+                // Reducimos el zoom si falló
                 zoom = Math.Max(0, zoom.Value - 2);
                 HttpContext.Session.SetInt32("ZoomLevel", zoom.Value);
 
                 if (attempts >= 6)
-                    ViewBag.Message = $"Se acabaron los intentos. Era {pokemonName}.";
+                {
+
+                    ViewBag.Message = $"Out of attempts. It was {pokemonName}.";
+                    isGameOver = true;
+                    zoom = 0; 
+                }
                 else
-                    ViewBag.Message = $"Incorrecto. Intenta de nuevo.";
+                {
+
+                    ViewBag.Message = $"Wrong! Try again.";
+                }
             }
 
             var client = _httpClientFactory.CreateClient();
@@ -121,6 +137,7 @@ public async Task<IActionResult> SearchPokemon(string term)
             ViewBag.Sprite = sprite;
             ViewBag.ZoomLevel = zoom;
             ViewBag.Attempts = attempts;
+            ViewBag.IsGameOver = isGameOver; 
 
             return View("Index");
         }

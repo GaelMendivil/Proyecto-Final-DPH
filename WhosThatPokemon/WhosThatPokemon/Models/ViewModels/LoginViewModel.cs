@@ -4,14 +4,14 @@ namespace WhosThatPokemon.ViewModels
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage = "El correo o usuario es obligatorio")]
+        [Required(ErrorMessage = "Username or email is required")]
         public string EmailOrUser { get; set; }
 
-        [Required(ErrorMessage = "La contraseña es obligatoria")]
+        [Required(ErrorMessage = "Password is required")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Recordarme")]
+        [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
     }
 }

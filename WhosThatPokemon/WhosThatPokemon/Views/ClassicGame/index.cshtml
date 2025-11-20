@@ -299,16 +299,16 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
 
 </style>
 
-<a asp-controller="Games" asp-action="Index" class="back-button" title="Volver a Games" aria-label="Volver a Games">
+<a asp-controller="Games" asp-action="Index" class="back-button" title="Back to Games" aria-label="Back to Games">
     &#8592;
 </a>
 
 <div class="title-fixed" aria-hidden="false">
-    <div class="title-inner" role="img" aria-label="¿Quién es ese Pokémon?">
-        <h1 class="pokemon-title hollow line1" aria-hidden="true">¿Quién es ese</h1>
+    <div class="title-inner" role="img" aria-label="Who's That Pokémon?">
+        <h1 class="pokemon-title hollow line1" aria-hidden="true">Who's That</h1>
         <h1 class="pokemon-title hollow line2" aria-hidden="true">Pokémon?</h1>
 
-        <h1 class="pokemon-title solid line1" aria-hidden="true">¿Quién es ese</h1>
+        <h1 class="pokemon-title solid line1" aria-hidden="true">Who's That</h1>
         <h1 class="pokemon-title solid line2" aria-hidden="true">Pokémon?</h1>
 
     </div>
@@ -325,12 +325,12 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
 
     @if (Model != null && Model.HasGuessedCorrectly)
     {
-        <p class="game-over-message">¡Felicidades, Lograste adivinar el Pokemon!</p>
-        <p>El Pokémon era: <strong>@Model.Guesses.First().Name</strong></p>
+        <p class="game-over-message">Congratulations! You guessed the Pokémon!</p>
+        <p>The Pokémon was: <strong>@Model.Guesses.First().Name</strong></p>
         <img src="@Model.Guesses.First().ImageUrl" alt="@Model.Guesses.First().Name" class="pokemon-image" style="width:120px; height:120px;" />
         <br />
         <a href="@Url.Action("Index", "ClassicGame")" class="input-area button" style="text-decoration:none; display:inline-block; margin-top:20px;">
-            Jugar de nuevo
+            Play Again
         </a>
     }
     else
@@ -338,11 +338,11 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
         <form asp-controller="ClassicGame" asp-action="Guess" method="post" class="input-area">
 
             <div class="autocomplete-container" data-url="@Url.Action("SearchPokemon", "ClassicGame")">
-                <input type="text" id="pokemonNameInput" name="CurrentGuessName" value="@(Model?.CurrentGuessName)" placeholder="Escribe aquí" autocomplete="off" required />
+                <input type="text" id="pokemonNameInput" name="CurrentGuessName" value="@(Model?.CurrentGuessName)" placeholder="Type here..." autocomplete="off" required />
                 <div id="autocomplete-list" class="autocomplete-items"></div>
             </div>
 
-            <button type="submit">Adivinar</button>
+            <button type="submit">Guess</button>
         </form>
 
         @if (Model?.Guesses != null && Model.Guesses.Any())
@@ -352,13 +352,13 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
                     <thead>
                         <tr>
                             <th>Pokémon</th>
-                            <th>Tipo 1</th>
-                            <th>Tipo 2</th>
-                            <th>Etapa Evolutiva</th>
+                            <th>Type 1</th>
+                            <th>Type 2</th>
+                            <th>Evo Stage</th>
                             <th>Color</th>
                             <th>Gen</th>
-                            <th>Altura (m)</th>
-                            <th>Peso (Kg)</th>
+                            <th>Height (m)</th>
+                            <th>Weight (kg)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -423,113 +423,10 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
     <button id="reroll-button" title="Reroll Pokémon"></button>
 </div>
 
+<script src="~/js/pokemon-autocomplete.js"></script>
+
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-
-    const container = document.querySelector(".autocomplete-container");
-    const input = document.getElementById("pokemonNameInput");
-    const autocompleteList = document.getElementById("autocomplete-list");
-    const searchUrl = container ? container.dataset.url : null;
-
-    let currentFocus = -1;
-
-    if (input && searchUrl) {
-        
-        input.addEventListener("input", async function() {
-            let val = this.value;
-            
-            closeAllLists(); 
-            currentFocus = -1; 
-
-            if (!val || val.length < 2) return;
-
-            try {
-                const response = await fetch(`${searchUrl}?term=${encodeURIComponent(val)}`);
-                if (!response.ok) return;
-
-                const suggestions = await response.json();
-
-                suggestions.forEach(s => {
-                    const itemDiv = document.createElement("div");
-
-                    itemDiv.innerHTML = `
-                        <img src="${s.imageUrl || ''}" class="autocomplete-sprite" alt="${s.name}">
-                        <span><strong>${s.name.substr(0, val.length)}</strong>${s.name.substr(val.length)}</span>
-                        <input type='hidden' value='${s.name}'> 
-                    `;
-
-                    itemDiv.addEventListener("click", function() {
-                        input.value = this.getElementsByTagName("input")[0].value;
-                        closeAllLists();
-                    });
-
-                    autocompleteList.appendChild(itemDiv);
-                });
-
-            } catch (error) {
-                console.error(error);
-            }
-        });
-
-        input.addEventListener("keydown", function(e) {
-            let list = document.getElementById("autocomplete-list");
-            if (list) list = list.getElementsByTagName("div");
-            
-            if (e.keyCode == 40) { 
-                currentFocus++;
-                addActive(list);
-            } else if (e.keyCode == 38) { 
-                currentFocus--;
-                addActive(list);
-            } else if (e.keyCode == 13) { 
-                if (currentFocus > -1) {
-                    if (list) {
-                        e.preventDefault(); 
-                        list[currentFocus].click();
-                    }
-                }
-            }
-        });
-    }
-
-    function addActive(x) {
-        if (!x) return false;
-        removeActive(x); 
-
-        if (currentFocus >= x.length) currentFocus = 0; 
-        if (currentFocus < 0) currentFocus = (x.length - 1); 
-
-        x[currentFocus].classList.add("autocomplete-active");
-        
-        x[currentFocus].scrollIntoView({ block: 'nearest', inline: 'start' });
-    }
-
-    function removeActive(x) {
-        for (let i = 0; i < x.length; i++) {
-            x[i].classList.remove("autocomplete-active");
-        }
-    }
-
-    function closeAllLists() {
-        if (autocompleteList) autocompleteList.innerHTML = '';
-        currentFocus = -1;
-    }
-
-    document.addEventListener("click", e => {
-        if (input && e.target !== input) closeAllLists();
+    document.addEventListener("DOMContentLoaded", function() {
+        setupPokemonAutocomplete("pokemonNameInput", "autocomplete-list", "autocomplete-container");
     });
-
-    const rerollButton = document.getElementById("reroll-button");
-    if (rerollButton) {
-        rerollButton.addEventListener("click", function() {
-            const checkedGens = document.querySelectorAll(".gen-filter:checked");
-            const params = new URLSearchParams();
-            checkedGens.forEach(c => params.append("gens", c.value));
-            if (![...checkedGens].length) {
-                for (let i = 1; i <= 9; i++) params.append("gens", i);
-            }
-            window.location.href = `/ClassicGame?${params.toString()}`;
-        });
-    }
-});
 </script>

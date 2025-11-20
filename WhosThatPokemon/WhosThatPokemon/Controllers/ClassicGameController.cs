@@ -50,7 +50,7 @@
                 HttpContext.Session.Set("Filters", filters);
             }
 
-            // GET: INDEX 
+        // GET: INDEX 
         [HttpGet]
         public async Task<IActionResult> Index([FromQuery] List<int> gens)
         {

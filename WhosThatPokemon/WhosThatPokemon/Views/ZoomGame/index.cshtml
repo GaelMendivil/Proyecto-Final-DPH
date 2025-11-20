@@ -1,152 +1,207 @@
 @{
     ViewData["Title"] = "Zoom Pokémon";
+    bool isGameOver = ViewBag.IsGameOver == true;
 }
 
 <partial name="_LogoutBall" />
 
 <style>
+    .title-container {
+        position: relative;
+        text-align: center;
+        padding-top: 10px;
+        width: 100%;
+        height: 25vh;
+    }
 
-.title-container {
-    position: relative;
-    text-align: center;
-    padding-top: 10px;
-    width: 100%;
-    height: 25vh;
-}
+    .pokemon-title {
+        font-weight: normal;
+        margin: 0;
+        position: absolute;
+        width: 100%;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        line-height: 0.9;
+    }
 
-.pokemon-title {
-    font-weight: normal;
-    margin: 0;
-    position: absolute;
-    width: 100%;
+    .pokemon-title.hollow {
+        font-family: 'Pokemon Hollow', sans-serif;
+        color: #2a75bb;
+        -webkit-text-stroke: 15px #003a70;
+        text-shadow: 3px 0 0 #003a70, -3px 0 0 #003a70, 0 3px 0 #003a70, 0 -3px 0 #003a70,
+            2px 2px 0 #003a70, -2px -2px 0 #003a70, 2px -2px 0 #003a70, -2px 2px 0 #003a70;
+        font-size: 7vw;
+    }
 
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    .pokemon-title.solid {
+        font-family: 'Pokemon Solid', sans-serif;
+        color: #FFCB05;
+        font-size: 7vw;
+    }
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    line-height: 0.9;
-}
+    .back-button {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 1400;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px;
+        height: 44px;
+        border-radius: 10px;
+        background: linear-gradient(180deg,#1d5fe0,#124aa8);
+        color: #fff;
+        text-decoration: none;
+        font-size: 26px;
+        font-weight: 800;
+        border: 3px solid rgba(10,40,120,0.9);
+        box-shadow: 0 6px 14px rgba(10,40,120,0.28);
+        transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .back-button:hover, .back-button:focus {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 8px 18px rgba(10,40,120,0.36);
+    }
 
-.pokemon-title.hollow {
-    font-family: 'Pokemon Hollow', sans-serif;
-    color: #2a75bb;
-    -webkit-text-stroke: 15px #003a70;
+    .zoom-container {
+        width: 320px;
+        height: 320px;
+        margin: 20px auto;
+        border-radius: 20px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 0 20px rgba(0,0,0,0.25);
+        padding-top: 20px;
+    }
+    .zoom-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform-origin: center;
+        transition: transform 0.3s ease-out;
+        user-drag: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        pointer-events: none;
+        touch-action: none;
+    }
+    .message {
+        text-align:center;
+        margin-top:15px;
+        font-size:20px;
+        font-weight:bold;
+        color:#c0392b;
+        padding-top: 10px;
+    }
+    .attempts {
+        text-align:center;
+        font-size:18px;
+        margin-top:10px;
+        font-family: 'Press Start 2P', cursive;
+        letter-spacing: 1px;
+    }
 
-    text-shadow:
-        3px 0 0 #003a70,
-        -3px 0 0 #003a70,
-        0 3px 0 #003a70,
-        0 -3px 0 #003a70,
-        2px 2px 0 #003a70,
-        -2px -2px 0 #003a70,
-        2px -2px 0 #003a70,
-        -2px 2px 0 #003a70;
+    .guess-box {
+        text-align:center;
+        margin-top:20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center; 
+    }
 
-    font-size: 7vw;
-}
+    .autocomplete-container {
+        position: relative;
+        width: 40%; 
+        min-width: 250px; 
+        margin: 0 auto;
+    }
 
-.pokemon-title.solid {
-    font-family: 'Pokemon Solid', sans-serif;
-    color: #FFCB05;
-    font-size: 7vw;
-}
+    .guess-box input {
+        padding: 10px;
+        width: 100%; 
+        border-radius: 10px;
+        border: 1px solid #aaa;
+        box-sizing: border-box;
+    }
+    
+    .guess-box input:disabled {
+        background-color: #e0e0e0;
+        color: #888;
+        cursor: not-allowed;
+    }
 
-.back-button {
-    position: fixed;
-    top: 12px;
-    left: 12px;
-    z-index: 1400;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 44px;
-    border-radius: 10px;
-    background: linear-gradient(180deg,#1d5fe0,#124aa8);
-    color: #fff;
-    text-decoration: none;
-    font-size: 26px;
-    font-weight: 800;
-    border: 3px solid rgba(10,40,120,0.9);
-    box-shadow: 0 6px 14px rgba(10,40,120,0.28);
-    transition: transform .12s ease, box-shadow .12s ease;
-}
-.back-button:hover, .back-button:focus {
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 8px 18px rgba(10,40,120,0.36);
-}
+    .guess-box button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: #27ae60;
+        border: none;
+        color: white;
+        border-radius: 10px;
+        font-weight: bold;
+        cursor: pointer;
+    }
 
-.zoom-container {
-    width: 320px;
-    height: 320px;
-    margin: 20px auto;
-    border-radius: 20px;
-    overflow: hidden;
-    background: white;
-    box-shadow: 0 0 20px rgba(0,0,0,0.25);
-    padding-top: 20px;
-}
-.zoom-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform-origin: center;
-    transition: transform 0.3s ease-out;
-    user-drag: none;
-    user-select: none;
-    -webkit-user-drag: none;
-    pointer-events: none;
-    touch-action: none;
-}
-.message {
-    text-align:center;
-    margin-top:15px;
-    font-size:20px;
-    font-weight:bold;
-    color:#c0392b;
-    padding-top: 10px;
-}
-.attempts {
-    text-align:center;
-    font-size:18px;
-    margin-top:10px;
-    font-family: 'Press Start 2P', cursive;
-    letter-spacing: 1px;
-}
+    .guess-box button:disabled {
+        background-color: #95a5a6;
+        cursor: not-allowed;
+    }
 
-.guess-box {
-    text-align:center;
-    margin-top:20px;
-}
-.guess-box input {
-    padding:10px;
-    width:40%;
-    border-radius:10px;
-    border:1px solid #aaa;
-}
-.guess-box button {
-    margin-top:10px;
-    padding:10px 20px;
-    background:#27ae60;
-    border:none;
-    color:white;
-    border-radius:10px;
-    font-weight:bold;
-    cursor:pointer;
-}
+    .autocomplete-items {
+        position: absolute;
+        border: 1px solid #999;
+        border-top: none;
+        z-index: 99;
+        top: 100%;
+        left: 0;
+        right: 0;
+        max-height: 260px;
+        overflow-y: auto;
+        background-color: #fff;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        text-align: left; 
+    }
 
-.ui-autocomplete {
-    max-height: 260px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    z-index: 2000 !important;
-    background: white;
-}
-.ui-menu-item-wrapper { display:flex; align-items:center; gap:8px; padding:6px 8px; }
-.ui-menu-item-wrapper img { width:36px; height:36px; object-fit:contain; image-rendering:pixelated; }
+    .autocomplete-items div {
+        padding: 6px 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+        display: flex;
+        align-items: center;
+    }
+
+    .autocomplete-items div:hover {
+        background-color: #e9e9e9;
+    }
+
+    .autocomplete-sprite {
+        width: 36px;
+        height: 36px;
+        object-fit: contain;
+        image-rendering: pixelated;
+        margin-right: 10px;
+    }
+
+    .autocomplete-active {
+        background-color: #1d5fe0 !important;
+        color: #ffffff !important;
+    }
+    .autocomplete-sprite {
+        width: 40px;
+        height: 40px;
+        object-fit: contain;
+        image-rendering: pixelated; 
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+        margin-right: 10px;
+    }
 
 </style>
 
@@ -164,7 +219,7 @@
     ViewData["BodyClass"] = "classic-game-page";
 }
 
-<a asp-controller="Games" asp-action="Index" class="back-button" title="Volver a Games" aria-label="Volver a Games">
+<a asp-controller="Games" asp-action="Index" class="back-button" title="Back to Games" aria-label="Back to Games">
     &#8592;
 </a>
 
@@ -186,80 +241,39 @@
 </div>
 
 <div class="attempts">
-    Intentos: @ViewBag.Attempts / 6
+    Attempts: @ViewBag.Attempts / 6
 </div>
 
 <div class="guess-box">
-    <form asp-action="Guess" asp-controller="ZoomGame" method="post" id="guessForm">
-        <input id="guessBox" name="guess" placeholder="Adivina el Pokémon..." autocomplete="off" required />
-        <br />
-        <button type="submit">Adivinar</button>
+    <form asp-action="Guess" asp-controller="ZoomGame" method="post" id="guessForm" style="width:100%; display:flex; flex-direction:column; align-items:center;">
+        
+        <div class="autocomplete-container" data-url="@Url.Action("SearchPokemon", "ZoomGame")">
+            <input id="guessBox" 
+                   name="guess" 
+                   placeholder="Guess the Pokémon..." 
+                   autocomplete="off" 
+                   required 
+                   @(isGameOver ? "disabled" : "") />
+            <div id="autocomplete-list" class="autocomplete-items"></div>
+        </div>
+
+        <button type="submit" @(isGameOver ? "disabled" : "")>Guess</button>
     </form>
 
     <br />
 
     <form asp-action="Index" asp-controller="ZoomGame" method="get">
-        <button style="background:#2980b9;">Nuevo Pokémon</button>
+        <button style="background:#2980b9;">New Pokémon</button>
     </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css" />
+<script src="~/js/pokemon-autocomplete.js"></script>
 
-<!-- Autocomplete-->
-<script>
-    (function($){
-        $(function() {
-            const url = '@Url.Action("SearchPokemon", "ZoomGame")';
-
-            function normalizeItem(item){
-                return {
-                    label: item.name || item.Name || item.label || "",
-                    value: item.name || item.Name || item.value || "",
-                    image: item.imageUrl || item.ImageUrl || item.image || ""
-                };
-            }
-
-            $("#guessBox").autocomplete({
-                source: function(request, response) {
-                    console.log("Autocomplete request:", request.term);
-                    $.ajax({
-                        url: url,
-                        type: 'GET',
-                        data: { term: request.term },
-                        dataType: 'json',
-                        success: function(data) {
-                            console.log("Autocomplete response:", data);
-                            if (!Array.isArray(data)) {
-                                response([]);
-                                return;
-                            }
-                            const items = data.map(normalizeItem).slice(0, 10);
-                            response(items);
-                        },
-                        error: function(xhr, status, err) {
-                            console.error("Autocomplete AJAX error:", status, err, xhr.responseText);
-                            response([]);
-                        }
-                    });
-                },
-                minLength: 2,
-                focus: function(event, ui) {
-                    event.preventDefault();
-                    $("#guessBox").val(ui.item.value);
-                },
-                select: function(event, ui) {
-                    $("#guessBox").val(ui.item.value);
-                    return false;
-                }
-            })
-            .autocomplete("instance")._renderItem = function (ul, item) {
-            return $("<li>")
-             .append(`<div class="ui-menu-item-wrapper">${item.label}</div>`)
-             .appendTo(ul);
-            };
-
+@if (!isGameOver)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setupPokemonAutocomplete("guessBox", "autocomplete-list", "autocomplete-container");
         });
-    })(jQuery);
-</script>
+    </script>
+}

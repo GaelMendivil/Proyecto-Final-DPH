@@ -23,11 +23,11 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <a asp-controller="Games" asp-action="Index" class="start-button">
-            JUGAR
+            PLAY
         </a>
 
         <a asp-controller="Account" asp-action="Logout" class="start-button" style="filter: hue-rotate(140deg);">
-            SALIR
+            LOGOUT
         </a>
     }
     else

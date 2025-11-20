@@ -180,7 +180,6 @@ namespace WhosThatPokemon.Services
             var names = await GetAllPokemonNamesAsync();
 
             var results = new List<PokemonViewModel>();
-            // Controlar concurrencia para no sobrecargar la API 
             var semaphore = new SemaphoreSlim(10);
             var tasks = new List<Task>();
 
@@ -202,7 +201,6 @@ namespace WhosThatPokemon.Services
                     }
                     catch
                     {
-                        // ignorar errores individuales
                     }
                     finally
                     {

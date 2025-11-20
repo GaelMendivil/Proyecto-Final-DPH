@@ -53,7 +53,6 @@ namespace WhosThatPokemon.Services
                     .SetAbsoluteExpiration(TimeSpan.FromHours(12));
                 _cache.Set(CacheKey, allPokemon, options);
 
-                // Guardamos en la variable local para acceso rápido
                 _localPokemonList = allPokemon;
                 IsDataLoaded = true;
             }
