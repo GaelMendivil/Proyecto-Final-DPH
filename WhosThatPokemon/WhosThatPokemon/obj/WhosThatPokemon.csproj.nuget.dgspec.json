@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\almaz\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj": {}
+    "C:\\Users\\prisc\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj": {}
   },
   "projects": {
-    "C:\\Users\\almaz\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj": {
+    "C:\\Users\\prisc\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\almaz\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
+        "projectUniqueName": "C:\\Users\\prisc\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
         "projectName": "WhosThatPokemon",
-        "projectPath": "C:\\Users\\almaz\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
-        "packagesPath": "C:\\Users\\almaz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\almaz\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\obj\\",
+        "projectPath": "C:\\Users\\prisc\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\WhosThatPokemon.csproj",
+        "packagesPath": "C:\\Users\\prisc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\prisc\\OneDrive\\Documentos\\GitHub\\Proyecto-Final-DPH\\WhosThatPokemon\\WhosThatPokemon\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\almaz\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\prisc\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -78,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
