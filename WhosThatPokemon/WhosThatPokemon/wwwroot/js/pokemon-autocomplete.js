@@ -104,18 +104,3 @@ function setupPokemonAutocomplete(inputId, listId, containerClass) {
         if (e.target !== input) closeAllLists();
     });
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    const rerollButton = document.getElementById("reroll-button");
-    if (rerollButton) {
-        rerollButton.addEventListener("click", function() {
-            const checkedGens = document.querySelectorAll(".gen-filter:checked");
-            const params = new URLSearchParams();
-            checkedGens.forEach(c => params.append("gens", c.value));
-            if (![...checkedGens].length) {
-                for (let i = 1; i <= 9; i++) params.append("gens", i);
-            }
-            window.location.href = `${window.location.pathname}?${params.toString()}`;
-        });
-    }
-});
