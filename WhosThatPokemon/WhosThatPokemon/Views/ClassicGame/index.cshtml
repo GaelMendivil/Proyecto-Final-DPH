@@ -11,7 +11,6 @@
 <partial name="_LogoutBall" />
 
 <style>
-
 @@font-face {
     font-family: 'Pokemon Solid';
     src: url('/fonts/Pokemon Solid.ttf') format('truetype');
@@ -382,7 +381,7 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
     }
 </div>
 
-<div class="generation-filter-container">
+<form method="get" asp-controller="ClassicGame" asp-action="Index" class="generation-filter-container">
     <div class="gen-switch-container">
         <input type="checkbox" id="gen-1" class="gen-filter" name="gens" value="1"   @(selectedGens.Contains(1) ? "checked" : "")>
         <label for="gen-1" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" alt="Gen1"></label>
@@ -420,8 +419,8 @@ th { color: #333; font-weight: bold; font-size: 0.9em; padding-bottom: 10px; }
         <label for="gen-9" class="gen-sprite-label"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/912.png" alt="Gen9"></label>
     </div>
 
-    <button id="reroll-button" title="Reroll Pokémon"></button>
-</div>
+    <button type="submit" id="reroll-button" title="Reroll Pokémon"></button>
+</form>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {

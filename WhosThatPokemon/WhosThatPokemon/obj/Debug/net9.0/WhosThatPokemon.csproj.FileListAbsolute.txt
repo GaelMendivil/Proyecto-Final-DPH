@@ -922,3 +922,7 @@ C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPok
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\bin\Debug\net9.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\cwdwj9776j-u5y0w7884h.gz
+<<<<<<< Updated upstream
+=======
+C:\Users\Usuario\Documents\GitHub\Proyecto-Final-DPH\WhosThatPokemon\WhosThatPokemon\obj\Debug\net9.0\compressed\c6hph0l4s0-zl75c1fc61.gz
+>>>>>>> Stashed changes
